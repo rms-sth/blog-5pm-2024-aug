@@ -1,6 +1,28 @@
 {% extends "base.html" %}
 
+{% block extra_css %}
+  <style>
+      li {
+          color: red;
+      }
+  </style>
+{% endblock extra_css %}
+
 {% block content %}
+
+  <div class="m-3">
+    {% if form.errors and form.non_field_errors %}
+
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ form.non_field_errors }}
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"></button>
+      </div>
+ 
+    {% endif %}
+  </div>
 
   <form action="" method="post" class="m-2">
     {% csrf_token %}
@@ -10,6 +32,7 @@
              class="form-control"
              name="username"
              placeholder="Enter username" />
+      {{ form.username.errors }}
     </div>
     <div class="mb-3">
       <label for="password" class="form-label">Password</label>
@@ -17,6 +40,7 @@
              class="form-control"
              name="password"
              placeholder="Enter password" />
+      {{ form.password.errors }}
     </div>
     <button type="submit" class="btn btn-success">Login</button>
   </form>
